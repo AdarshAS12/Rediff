@@ -43,7 +43,14 @@ public class RediffProject {
 		{
 			System.out.println("Logo not Displayed");
 		}
-		
+		List<WebElement> lis=driver.findElements(By.tagName("a"));
+		System.out.println(lis.size());
+		for(WebElement list:lis)
+		{
+			String txt=list.getText();
+			String url=list.getAttribute("href");
+			System.out.println(txt+" :"+url);
+		}
 		
 		driver.findElement(By.xpath("//*[@id=\"signin_info\"]/a[1]")).click();
 		driver.findElement(By.xpath("/html/body/div[2]/div[1]/div/div[2]/div[2]/form/div[1]/div/input")).sendKeys("adarsh123");
