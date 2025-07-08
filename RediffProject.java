@@ -32,8 +32,8 @@ public class RediffProject {
 		js.executeScript("window.scrollBy(0,1000)");
 		Thread.sleep(2000);
 			
-		//File src=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-	//	FileHandler.copy(src,new File("E:\\Rediffss.png") );
+		File src=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		FileHandler.copy(src,new File("E:\\Rediffss.png") );
 		WebElement logo=driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/a/img"));
 		if(logo.isDisplayed())
 		{
@@ -89,9 +89,9 @@ public class RediffProject {
 	    List<WebElement> li2=DropYear.getOptions();
 	    System.out.println(li2.size());
 	    
-		//WebElement dob=driver.findElement(By.xpath("/html/body/div[2]/div[2]/form/div/div[8]"));
-		//File Dobss=dob.getScreenshotAs(OutputType.FILE);
-		//FileHandler.copy(Dobss,new File("./Screenshot//daob.png"));
+		WebElement dob=driver.findElement(By.xpath("/html/body/div[2]/div[2]/form/div/div[8]"));
+		File Dobss=dob.getScreenshotAs(OutputType.FILE);
+		FileHandler.copy(Dobss,new File("./Screenshot//daob.png"));
 
 		WebElement gender=driver.findElement(By.xpath("/html/body/div[2]/div[2]/form/div/div[9]/div/label[1]/input"));
 		WebElement gender1=driver.findElement(By.xpath("/html/body/div[2]/div[2]/form/div/div[9]/div/label[2]/input"));
