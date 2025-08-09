@@ -1,12 +1,13 @@
-package basic;
+package testngPgms;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
@@ -14,15 +15,17 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.io.FileHandler;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class RediffProject {
 	ChromeDriver driver;
-	@Before
+	@BeforeClass
 	public void url()
 	{
 		driver =new ChromeDriver();
-		driver.get("https://m.rediff.com/");
+		driver.get("https://www.rediff.com/");
 	}
 	@Test
 	public void Rediff() throws IOException, InterruptedException
@@ -45,25 +48,26 @@ public class RediffProject {
 		}
 		List<WebElement> lis=driver.findElements(By.tagName("a"));
 		System.out.println(lis.size());
-		for(WebElement list:lis)
-		{
+	for(WebElement list:lis)
+	{
 			String txt=list.getText();
-			String url=list.getAttribute("href");
-			System.out.println(txt+" :"+url);
+		String url=list.getAttribute("href");
+		System.out.println(txt+" :"+url);
 		}
+	   //-------------Signin page-------------
 		
 		driver.findElement(By.xpath("//*[@id=\"signin_info\"]/a[1]")).click();
-		driver.findElement(By.xpath("/html/body/div[2]/div[1]/div/div[2]/div[2]/form/div[1]/div/input")).sendKeys("adarsh123");
-		driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys("ada");
+		driver.findElement(By.xpath("/html/body/div[2]/div[1]/div/div[2]/div[2]/form/div[1]/div/input")).sendKeys("afgfdgdg");
+		driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys("sfsf232");
 		driver.findElement(By.xpath("/html/body/div[2]/div[1]/div/div[2]/div[2]/form/button")).click();
 		driver.navigate().back();
 		driver.navigate().back();
 		
-		
+		//--------------Create Account page-------------
 		driver.findElement(By.xpath("//*[@id=\"signin_info\"]/a[2]")).click();
 		
-		driver.findElement(By.xpath("/html/body/div[2]/div[2]/form/div/div[2]/input")).sendKeys("Adarsh");
-		driver.findElement(By.xpath("/html/body/div[2]/div[2]/form/div/div[3]/div/input")).sendKeys("adrshka");
+		driver.findElement(By.xpath("/html/body/div[2]/div[2]/form/div/div[2]/input")).sendKeys("Adjfdgg");
+		driver.findElement(By.xpath("/html/body/div[2]/div[2]/form/div/div[3]/div/input")).sendKeys("adrsh23");
 		driver.findElement(By.xpath("/html/body/div[2]/div[2]/form/div/div[4]/input")).click();
 		Thread.sleep(2000); 
 		WebElement msg=driver.findElement(By.xpath("//*[@id=\"check_availability\"]/div/span"));
@@ -75,8 +79,8 @@ public class RediffProject {
             System.out.println("ID Not Available");
         }
 		
-		driver.findElement(By.xpath("//*[@id=\"newpasswd\"]")).sendKeys("Adarsh@1234");
-		driver.findElement(By.xpath("//input[@id='newpasswd1']")).sendKeys("Adarsh@1234");
+		driver.findElement(By.xpath("//*[@id=\"newpasswd\"]")).sendKeys("Luffy@1234");
+		driver.findElement(By.xpath("//input[@id='newpasswd1']")).sendKeys("Luffy@1234");
 
 		WebElement day=driver.findElement(By.xpath("/html/body/div[2]/div[2]/form/div/div[8]/select[1]"));
 		Select DropDay=new Select(day);
@@ -98,7 +102,7 @@ public class RediffProject {
 	    
 		WebElement dob=driver.findElement(By.xpath("/html/body/div[2]/div[2]/form/div/div[8]"));
 		File Dobss=dob.getScreenshotAs(OutputType.FILE);
-		FileHandler.copy(Dobss,new File("./Screenshot//daob.png"));
+	    FileHandler.copy(Dobss,new File("./Screenshot//daob.png"));
 
 		WebElement gender=driver.findElement(By.xpath("/html/body/div[2]/div[2]/form/div/div[9]/div/label[1]/input"));
 		WebElement gender1=driver.findElement(By.xpath("/html/body/div[2]/div[2]/form/div/div[9]/div/label[2]/input"));
@@ -116,8 +120,11 @@ public class RediffProject {
 		 WebElement ci=driver.findElement(By.xpath("//*[@id=\"div_city\"]/div/select"));
 		    Select city=new Select(ci);
 		    city.selectByVisibleText("Cochin");
-		    driver.findElement(By.xpath("/html/body/div[2]/div[2]/form/div/div[15]/div/input")).click();
-		    
+		   WebElement checkbox = driver.findElement(By.xpath("/html/body/div[2]/div[2]/form/div/div[15]/div/input"));
+         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", checkbox);
+         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", checkbox);
+
+ 
 		boolean c =driver.findElement(By.xpath("/html/body/div[2]/div[2]/form/div/div[15]/div/input")).isSelected();		
 		if(c)
 		{
@@ -140,10 +147,11 @@ public class RediffProject {
         Thread.sleep(2000);
         
 	}
-	@After
+	@AfterTest
 	public void close()
 	{
 		driver.close();
 	}
 }
+
 
